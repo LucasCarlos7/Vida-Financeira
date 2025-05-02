@@ -2,9 +2,10 @@ using VF.API.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDependencyInjection();
+builder.Services.AddControllers();
+builder.Services.AddDependencyInjection(builder.Configuration);
 
 var app = builder.Build();
 
@@ -14,5 +15,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-app.Run();
+app.MapControllers();
+//app.UseHttpsRedirection();
+app.Run("http://0.0.0.0:5000");

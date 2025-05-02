@@ -16,7 +16,11 @@ public class AppDbContext : DbContext
         _configuration = configuration;
     }
 
-    public virtual DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Account> Accounts { get; set; }
+    public DbSet<FinancialInstitution> FinancialInstitutions { get; set; }
+    public DbSet<ManualFinancialInstitution> ManualFinancialInstitutions { get; set; }
+    public DbSet<AutomaticFinancialInstitution> AutomaticFinancialInstitutions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

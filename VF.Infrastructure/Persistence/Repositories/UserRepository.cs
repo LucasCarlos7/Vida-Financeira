@@ -1,33 +1,43 @@
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using VF.Core.Entities;
+using VF.Core.InputModels;
 using VF.Core.Interfaces.Repositories;
+using VF.Core.Models;
 
-namespace VF.Infrastructure.Persistence.Repositories;
-
-public class UserRepository : Repository<User>, IUserRepository
+namespace VF.Infrastructure.Persistence.Repositories
 {
-    private readonly AppDbContext _dbContext;
-    public UserRepository(AppDbContext context) : base(context)
+    public class UserRepository : IUserRepository
     {
-        _dbContext = context;
+        private readonly AppDbContext _appDbContext;
+
+        public UserRepository(AppDbContext appDbContext)
+        {
+            _appDbContext = appDbContext;
+        }
+
+        public async Task RegisterAsync(UserModel userModel)
+        {
+            string script = 
+                @"INSERT INTO Users
+                    (Name, Email, PasswordHash, Cpf, Phone, PhotoUrl, CreatedAt, UpdatedAt)
+                VALUES
+                    (@Name, @Email, @PasswordHash, @Cpf, @Phone, @PhotoUrl, @CreatedAt, @UpdatedAt)";
+
+            var param = new 
+            {
+                Name = userModel.Name,
+                Email = userModel.Email,
+                PasswordHash = userModel.PasswordHash,
+                Cpf = userModel.Cpf,
+                Phone = userModel.Phone,
+                PhotoUrl = userModel.PhotoUrl,
+                CreatedAt = userModel.CreatedAt,
+                UpdatedAt = userModel.UpdatedAt
+            };
+
+            await _appDbContext.Database.GetDbConnection()
+                .ExecuteAsync(script, param);
+        }
     }
-
-    // public async Task<User?> ObterAsync(int codUser)
-    // {
-    //     const string sql = @"
-    //         SELECT 
-    //             Id, 
-    //             CodUser, 
-    //             Nome, 
-    //             Email
-    //         FROM 
-    //             [User]
-    //         WHERE 
-    //             CodUser = @codUser";
-
-    //     using var connection = _dbContext.Database.GetDbConnection();
-        
-    //     return await connection.QueryFirstOrDefaultAsync<User>(sql, new { codUser });
-    // }
 }
