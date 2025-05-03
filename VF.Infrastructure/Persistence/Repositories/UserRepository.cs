@@ -24,7 +24,7 @@ namespace VF.Infrastructure.Persistence.Repositories
                 VALUES
                     (@Name, @Email, @PasswordHash, @Cpf, @Phone, @PhotoUrl, @CreatedAt, @UpdatedAt)";
 
-            var param = new 
+            var parameter = new 
             {
                 Name = userModel.Name,
                 Email = userModel.Email,
@@ -37,7 +37,7 @@ namespace VF.Infrastructure.Persistence.Repositories
             };
 
             await _appDbContext.Database.GetDbConnection()
-                .ExecuteAsync(script, param);
+                .ExecuteAsync(script, parameter);
         }
     }
 }
