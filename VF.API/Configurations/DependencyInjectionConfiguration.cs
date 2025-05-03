@@ -1,3 +1,4 @@
+using VF.Application.Mappings;
 using VF.Application.Services;
 using VF.Core.Interfaces.Repositories;
 using VF.Core.Interfaces.Services;
@@ -15,10 +16,20 @@ public static class DependencyInjectionConfiguration
         
         services.Configure<CredentialsEmailConfiguration>(configuration.GetSection("CredentialsEmail"));
 
+        services.AddAutoMapper
+        (
+            typeof(AccountMappingProfile),
+            typeof(FinancialInstitutionMappingProfile)    
+        );
+
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<ISmsService, SmsService>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPendingUserService, PendingUserService>();
+        services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<IFinancialInstitutionRepository, FinancialInstitutionRepository>();
+        services.AddScoped<IFinancialInstitutionService, FinancialInstitutionService>();
     }
 }

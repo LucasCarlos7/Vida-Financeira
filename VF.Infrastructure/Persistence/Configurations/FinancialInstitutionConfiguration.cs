@@ -25,15 +25,9 @@ public class FinancialInstitutionConfiguration : IEntityTypeConfiguration<Financ
             .IsRequired()
             .HasColumnType("datetime2");
 
-        builder.Property(f => f.UpdateAt)
+        builder.Property(f => f.UpdatedAt)
             .IsRequired()
             .HasColumnType("datetime2");
-
-        // Configuração do discriminador
-        builder.HasDiscriminator<string>("InstitutionType")
-            .HasValue<FinancialInstitution>("Base")
-            .HasValue<ManualFinancialInstitution>("Manual")
-            .HasValue<AutomaticFinancialInstitution>("Automatic");
     }
 
 }

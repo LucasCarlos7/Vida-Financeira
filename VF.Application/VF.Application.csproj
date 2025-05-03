@@ -3,6 +3,9 @@
     <ProjectReference Include="..\VF.Core\VF.Core.csproj" />
     <ProjectReference Include="..\VF.Infrastructure\VF.Infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
