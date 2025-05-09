@@ -12,7 +12,7 @@ using VF.Infrastructure.Persistence;
 namespace VF.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250509013608_CreateCreditCard")]
+    [Migration("20250509015502_CreateCreditCard")]
     partial class CreateCreditCard
     {
         /// <inheritdoc />
@@ -94,10 +94,10 @@ namespace VF.Infrastructure.Migrations
 
                     b.Property<string>("CardName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(150)");
 
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("DueDay")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("MothlyLimit")
                         .HasColumnType("decimal(18,2)");

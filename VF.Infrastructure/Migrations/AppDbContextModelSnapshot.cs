@@ -93,8 +93,8 @@ namespace VF.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("DueDay")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("MothlyLimit")
                         .HasColumnType("decimal(18,2)");
