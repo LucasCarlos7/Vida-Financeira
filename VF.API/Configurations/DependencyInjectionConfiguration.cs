@@ -19,7 +19,8 @@ public static class DependencyInjectionConfiguration
         services.AddAutoMapper
         (
             typeof(AccountMappingProfile),
-            typeof(FinancialInstitutionMappingProfile)    
+            typeof(FinancialInstitutionMappingProfile),
+            typeof(CreditCardMappingProfile)
         );
 
         services.AddScoped<IEmailService, EmailService>();
@@ -31,5 +32,7 @@ public static class DependencyInjectionConfiguration
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IFinancialInstitutionRepository, FinancialInstitutionRepository>();
         services.AddScoped<IFinancialInstitutionService, FinancialInstitutionService>();
+        services.AddScoped<ICreditCardRepository, CreditCardRepository>();
+        services.AddScoped<ICreditCardSevice, CreditCardService>();
     }
 }
