@@ -9,14 +9,14 @@ public static class VerificationCodeStoreUtility
 
     public static void StoreCode(string key, string code)
     {
-        _store[key] = (code, DateTime.UtcNow.Add(_expiryTime));
+        _store[key] = (code, DateTime.Now.Add(_expiryTime));
     }
 
     public static bool ValidateCode(string key, string code)
     {
         if (_store.TryGetValue(key, out var entry))
         {
-            if (entry.Code == code && DateTime.UtcNow <= entry.Expiry)
+            if (entry.Code == code && DateTime.Now <= entry.Expiry)
             {
                 _store.TryRemove(key, out _);
                 

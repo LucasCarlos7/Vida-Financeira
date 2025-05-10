@@ -1,6 +1,5 @@
 using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using VF.Application.Utilities;
 using VF.Core.Interfaces.Services;
@@ -68,8 +67,8 @@ public class EmailService : IEmailService
             throw new InvalidOperationException("Código inválido ou expirado.");
 
         // var user = pendingUser;
-        // user.CreatedAt = DateTime.UtcNow;
-        // user.UpdatedAt = DateTime.UtcNow;
+        // user.CreatedAt = DateTime.Now;
+        // user.UpdatedAt = DateTime.Now;
 
         // await _userService.RegisterAsync(user);
         // await _pendingUserService.RemovePendingUserAsync(user.Email);

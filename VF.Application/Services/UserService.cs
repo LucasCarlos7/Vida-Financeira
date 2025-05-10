@@ -30,8 +30,8 @@ public class UserService : IUserService
             Phone = inputModel.Phone,
         };
 
-        newUser.CreatedAt = DateTime.UtcNow;
-        newUser.UpdatedAt = DateTime.UtcNow;
+        newUser.CreatedAt = DateTime.Now;
+        newUser.UpdatedAt = DateTime.Now;
 
         await _userRepository.RegisterAsync(newUser);
     }

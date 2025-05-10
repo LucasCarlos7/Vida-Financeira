@@ -9,7 +9,7 @@ public class FinancialInstitutionMappingProfile : Profile
     public FinancialInstitutionMappingProfile()
     {
         CreateMap<FinancialInstitutionInputModel, FinancialInstitutionModel>()
-            .ForMember(d => d.CreatedAt, o => o.MapFrom(x => DateTime.UtcNow))
-            .ForMember(d => d.UpdatedAt, o => o.MapFrom(x => DateTime.UtcNow));
+            .ForMember(d => d.CreatedAt, o => o.MapFrom(x => DateTime.Now))
+            .ForMember(d => d.UpdatedAt, o => o.MapFrom(x => DateTime.Now));
     }
 }
