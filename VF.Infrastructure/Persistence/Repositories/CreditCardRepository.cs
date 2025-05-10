@@ -18,9 +18,9 @@ public class CreditCardRepository : ICreditCardRepository
     {
         string script = 
             @"INSERT INTO CreditCards
-                (CardName, CardFlag, DueDay, MothlyLimit, AccountId)
+                (CardName, CardFlag, DueDay, MothlyLimit, AccountId, CreatedAt, UpdatedAt)
             VALUES
-                (@CardName, @CardFlag, @DueDate, @MothlyLimit, @AccountId)";
+                (@CardName, @CardFlag, @DueDay, @MothlyLimit, @AccountId, @CreatedAt, @UpdatedAt)";
 
         var parameter = new
         {
@@ -28,7 +28,9 @@ public class CreditCardRepository : ICreditCardRepository
             CardFlag = creditCard.CardFlag,
             DueDay = creditCard.DueDay,
             MothlyLimit = creditCard.MothlyLimit,
-            AccountId = creditCard.AccountId
+            AccountId = creditCard.AccountId,
+            CreatedAt = creditCard.CreatedAt,
+            UpdatedAt = creditCard.UpdatedAt
         };
 
         await _appDbContext.Database.GetDbConnection()
