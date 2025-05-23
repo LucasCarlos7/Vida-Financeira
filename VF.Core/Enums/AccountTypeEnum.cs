@@ -1,6 +1,6 @@
 namespace VF.Core.Enums
 {
-    public enum AccountType
+    public enum AccountTypeEnum
     {
         Wallet = 0,             // Carteira
         CheckingAccount = 1,    // Conta Corrente

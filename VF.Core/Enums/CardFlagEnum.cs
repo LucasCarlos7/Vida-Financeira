@@ -1,6 +1,6 @@
 namespace VF.Core.Enums;
 
-public enum CardFlag
+public enum CardFlagEnum
 {
     Visa = 0,
     MasterCard = 1,

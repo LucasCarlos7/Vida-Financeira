@@ -1,6 +1,6 @@
 namespace VF.Core.Enums;
 
-public enum RegistrationType
+public enum RegistrationTypeEnum
 {
     Manual = 0,
     Automatic = 1
