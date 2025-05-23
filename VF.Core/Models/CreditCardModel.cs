@@ -7,7 +7,7 @@ public class CreditCardModel
 {
     public int Id { get; set; }
     public string CardName { get; set; }
-    public CardFlag CardFlag { get; set; } // Enum Bandeira Cartão
+    public CardFlagEnum CardFlag { get; set; } // Enum Bandeira Cartão
     public int DueDay { get; set; } // Dia de vencimento
     public decimal MothlyLimit { get; set; } // Limite Mensal
     public DateTime CreatedAt { get; set; }
