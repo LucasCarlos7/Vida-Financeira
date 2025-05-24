@@ -34,6 +34,12 @@ namespace VF.Infrastructure.Persistence.Configurations
                 .HasForeignKey("CategoryId")  // Shadow property se não tiver na entidade
                 .OnDelete(DeleteBehavior.SetNull);
 
+                // Relacionamento com Category (opcional)
+            builder.HasOne(t => t.Subcategory)
+                .WithMany()
+                .HasForeignKey("SubcategoryId")  // Shadow property se não tiver na entidade
+                .OnDelete(DeleteBehavior.SetNull);
+
             // Relacionamento com Member (opcional)
             builder.HasOne(t => t.Member)
                 .WithMany()

@@ -13,14 +13,15 @@ public static class DependencyInjectionConfiguration
     public static void AddDependencyInjection(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<AppDbContext>();
-        
+
         services.Configure<CredentialsEmailConfiguration>(configuration.GetSection("CredentialsEmail"));
 
         services.AddAutoMapper
         (
             typeof(AccountMappingProfile),
             typeof(FinancialInstitutionMappingProfile),
-            typeof(CreditCardMappingProfile)
+            typeof(CreditCardMappingProfile),
+            typeof(CategoryMappingProfile)
         );
 
         services.AddScoped<IEmailService, EmailService>();
@@ -34,5 +35,7 @@ public static class DependencyInjectionConfiguration
         services.AddScoped<IFinancialInstitutionService, FinancialInstitutionService>();
         services.AddScoped<ICreditCardRepository, CreditCardRepository>();
         services.AddScoped<ICreditCardSevice, CreditCardService>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ICategoryService, CategoryService>();
     }
 }
