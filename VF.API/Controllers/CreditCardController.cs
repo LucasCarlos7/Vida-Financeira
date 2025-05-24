@@ -15,7 +15,7 @@ public class CreditCardController : ControllerBase
         _creditCardSevice = creditCardSevice;
     }
 
-    [HttpPost]
+    [HttpPost("Register")]
     public async Task<IActionResult> RegisterAsync(CreditCardInputModel inputModel)
     {
         await _creditCardSevice.RegisterAsync(inputModel);

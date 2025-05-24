@@ -15,7 +15,7 @@ public class FinancialInstitutionController : ControllerBase
         _financialInstitutionService = financialInstitutionService;
     }
 
-    [HttpPost("register")]
+    [HttpPost("Register")]
     public async Task<IActionResult> RegisterAsync(FinancialInstitutionInputModel inputModel)
     {
         await _financialInstitutionService.RegisterAsync(inputModel);

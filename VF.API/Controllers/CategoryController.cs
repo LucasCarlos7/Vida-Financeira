@@ -15,7 +15,7 @@ public class CategoryController : ControllerBase
         _categoryService = categoryService;
     }
 
-    [HttpPost("registerCategory")]
+    [HttpPost("RegisterCategory")]
     public async Task<IActionResult> RegisterCategoryAsync(CategoryInputModel inputModel)
     {
         await _categoryService.RegisterCategoryAsync(inputModel);
@@ -23,7 +23,7 @@ public class CategoryController : ControllerBase
         return Created();
     }
 
-    [HttpPost("registerSubcategory")]
+    [HttpPost("RegisterSubcategory")]
     public async Task<IActionResult> RegisterSubategoryAsync(SubcategoryInputModel inputModel)
     {
         await _categoryService.RegisterSubcategoryAsync(inputModel);
@@ -31,7 +31,7 @@ public class CategoryController : ControllerBase
         return Created();
     }
 
-    [HttpGet("categories")]
+    [HttpGet("Categories")]
     public async Task<IActionResult> GetAllCategoriesAsync(int transactionType)
     {
         var categories = await _categoryService.GetCategoriesWithSubcategoriesAsync(transactionType);

@@ -15,7 +15,7 @@ public class AccountController : ControllerBase
         _accountService = accountService;
     }
 
-    [HttpPost("register")]
+    [HttpPost("Register")]
     public async Task<IActionResult> RegisterAsync(AccountInputModel inputModel)
     {
         await _accountService.RegisterAsync(inputModel);
