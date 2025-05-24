@@ -37,5 +37,7 @@ public static class DependencyInjectionConfiguration
         services.AddScoped<ICreditCardSevice, CreditCardService>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IMemberRepository, MemberRepository>();
+        services.AddScoped<IMemberService, MemberService>();
     }
 }
