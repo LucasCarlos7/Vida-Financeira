@@ -14,7 +14,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.Id)
             .ValueGeneratedOnAdd()
-            .HasColumnType("int");
+            .HasColumnType("uniqueidentifier");
 
         builder.Property(u => u.Cpf)
             .IsRequired()

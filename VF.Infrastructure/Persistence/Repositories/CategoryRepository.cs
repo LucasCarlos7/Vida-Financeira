@@ -74,7 +74,7 @@ public class CategoryRepository : ICategoryRepository
             (query, new { transactionType })).ToList();
     }
 
-    public async Task<List<SubcategoryViewModel>> GetSubcategoriesAsync(List<int> categoryIds)
+    public async Task<List<SubcategoryViewModel>> GetSubcategoriesAsync(List<Guid> categoryIds)
     {
         string query =
             @"SELECT
@@ -90,7 +90,7 @@ public class CategoryRepository : ICategoryRepository
             (query, new { categoryIds })).ToList();
     }
 
-    public async Task RemoveAsync(int id)
+    public async Task RemoveAsync(Guid id)
     {
         string sql =
             @"DELETE FROM 

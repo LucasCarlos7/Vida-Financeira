@@ -22,28 +22,11 @@ namespace VF.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TagTransaction", b =>
-                {
-                    b.Property<int>("TagsId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("TransactionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("TagsId", "TransactionId");
-
-                    b.HasIndex("TransactionId");
-
-                    b.ToTable("TransactionTags", (string)null);
-                });
-
             modelBuilder.Entity("VF.Core.Entities.Account", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AccountDescription")
                         .HasMaxLength(250)
@@ -63,8 +46,8 @@ namespace VF.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FinancialInstitutionId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("FinancialInstitutionId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsFiled")
                         .HasColumnType("bit");
@@ -78,8 +61,8 @@ namespace VF.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -92,11 +75,9 @@ namespace VF.Infrastructure.Migrations
 
             modelBuilder.Entity("VF.Core.Entities.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -124,14 +105,12 @@ namespace VF.Infrastructure.Migrations
 
             modelBuilder.Entity("VF.Core.Entities.CreditCard", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("CardFlag")
                         .HasColumnType("int");
@@ -160,13 +139,70 @@ namespace VF.Infrastructure.Migrations
                     b.ToTable("CreditCards", (string)null);
                 });
 
-            modelBuilder.Entity("VF.Core.Entities.FinancialInstitution", b =>
+            modelBuilder.Entity("VF.Core.Entities.ExpenseTransaction", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreditCardId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("FormPayment")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int?>("Installments")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("MemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PaymentCondition")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("SubcategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("TransactionValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CreditCardId");
+
+                    b.HasIndex("MemberId");
+
+                    b.HasIndex("SubcategoryId");
+
+                    b.ToTable("ExpenseTransactions", (string)null);
+                });
+
+            modelBuilder.Entity("VF.Core.Entities.FinancialInstitution", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -188,13 +224,56 @@ namespace VF.Infrastructure.Migrations
                     b.ToTable("FinancialInstitutions", (string)null);
                 });
 
+            modelBuilder.Entity("VF.Core.Entities.IncomeTransaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<Guid?>("MemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Received")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("SubcategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("TransactionValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("MemberId");
+
+                    b.HasIndex("SubcategoryId");
+
+                    b.ToTable("IncomeTransactions", (string)null);
+                });
+
             modelBuilder.Entity("VF.Core.Entities.Member", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateBirth")
                         .HasColumnType("datetime2");
@@ -214,14 +293,12 @@ namespace VF.Infrastructure.Migrations
 
             modelBuilder.Entity("VF.Core.Entities.Subcategory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -243,30 +320,43 @@ namespace VF.Infrastructure.Migrations
 
             modelBuilder.Entity("VF.Core.Entities.Tag", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<Guid?>("ExpenseTransactionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("IncomeTransactionId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("TransferTransactionId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ExpenseTransactionId");
+
+                    b.HasIndex("IncomeTransactionId");
+
+                    b.HasIndex("TransferTransactionId");
 
                     b.ToTable("Tags", (string)null);
                 });
 
-            modelBuilder.Entity("VF.Core.Entities.Transaction", b =>
+            modelBuilder.Entity("VF.Core.Entities.TransferTransaction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -274,32 +364,46 @@ namespace VF.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(250)");
 
-                    b.Property<int?>("MemberId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("DestinyAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("MemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("OriginAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SubcategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("TransactionValue")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Transferred")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("DestinyAccountId");
+
                     b.HasIndex("MemberId");
 
-                    b.ToTable("Transactions", (string)null);
+                    b.HasIndex("OriginAccountId");
 
-                    b.UseTptMappingStrategy();
+                    b.HasIndex("SubcategoryId");
+
+                    b.ToTable("TransferTransactions", (string)null);
                 });
 
             modelBuilder.Entity("VF.Core.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -341,85 +445,6 @@ namespace VF.Infrastructure.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("VF.Core.Entities.ExpenseTransaction", b =>
-                {
-                    b.HasBaseType("VF.Core.Entities.Transaction");
-
-                    b.Property<int?>("AccountId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreditCardId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FormPayment")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Installments")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("IsPaid")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("PaymentCondition")
-                        .HasColumnType("int");
-
-                    b.HasIndex("AccountId");
-
-                    b.HasIndex("CreditCardId");
-
-                    b.ToTable("ExpenseTransactions", (string)null);
-                });
-
-            modelBuilder.Entity("VF.Core.Entities.IncomeTransaction", b =>
-                {
-                    b.HasBaseType("VF.Core.Entities.Transaction");
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Received")
-                        .HasColumnType("bit");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("IncomeTransactions", (string)null);
-                });
-
-            modelBuilder.Entity("VF.Core.Entities.TransferTransaction", b =>
-                {
-                    b.HasBaseType("VF.Core.Entities.Transaction");
-
-                    b.Property<int>("DestinyAccountId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OriginAccountId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Transferred")
-                        .HasColumnType("bit");
-
-                    b.HasIndex("DestinyAccountId");
-
-                    b.HasIndex("OriginAccountId");
-
-                    b.ToTable("TransferTransactions", (string)null);
-                });
-
-            modelBuilder.Entity("TagTransaction", b =>
-                {
-                    b.HasOne("VF.Core.Entities.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VF.Core.Entities.Transaction", null)
-                        .WithMany()
-                        .HasForeignKey("TransactionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("VF.Core.Entities.Account", b =>
                 {
                     b.HasOne("VF.Core.Entities.FinancialInstitution", "FinancialInstitution")
@@ -450,6 +475,69 @@ namespace VF.Infrastructure.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("VF.Core.Entities.ExpenseTransaction", b =>
+                {
+                    b.HasOne("VF.Core.Entities.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VF.Core.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("VF.Core.Entities.CreditCard", "CreditCard")
+                        .WithMany()
+                        .HasForeignKey("CreditCardId");
+
+                    b.HasOne("VF.Core.Entities.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId");
+
+                    b.HasOne("VF.Core.Entities.Subcategory", "Subcategory")
+                        .WithMany()
+                        .HasForeignKey("SubcategoryId");
+
+                    b.Navigation("Account");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("CreditCard");
+
+                    b.Navigation("Member");
+
+                    b.Navigation("Subcategory");
+                });
+
+            modelBuilder.Entity("VF.Core.Entities.IncomeTransaction", b =>
+                {
+                    b.HasOne("VF.Core.Entities.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VF.Core.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("VF.Core.Entities.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId");
+
+                    b.HasOne("VF.Core.Entities.Subcategory", "Subcategory")
+                        .WithMany()
+                        .HasForeignKey("SubcategoryId");
+
+                    b.Navigation("Account");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Member");
+
+                    b.Navigation("Subcategory");
+                });
+
             modelBuilder.Entity("VF.Core.Entities.Subcategory", b =>
                 {
                     b.HasOne("VF.Core.Entities.Category", "Category")
@@ -461,76 +549,36 @@ namespace VF.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("VF.Core.Entities.Transaction", b =>
+            modelBuilder.Entity("VF.Core.Entities.Tag", b =>
                 {
-                    b.HasOne("VF.Core.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                    b.HasOne("VF.Core.Entities.ExpenseTransaction", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("ExpenseTransactionId");
 
-                    b.HasOne("VF.Core.Entities.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                    b.HasOne("VF.Core.Entities.IncomeTransaction", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("IncomeTransactionId");
 
-                    b.Navigation("Category");
-
-                    b.Navigation("Member");
-                });
-
-            modelBuilder.Entity("VF.Core.Entities.ExpenseTransaction", b =>
-                {
-                    b.HasOne("VF.Core.Entities.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("VF.Core.Entities.CreditCard", "CreditCard")
-                        .WithMany()
-                        .HasForeignKey("CreditCardId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("VF.Core.Entities.Transaction", null)
-                        .WithOne()
-                        .HasForeignKey("VF.Core.Entities.ExpenseTransaction", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-
-                    b.Navigation("CreditCard");
-                });
-
-            modelBuilder.Entity("VF.Core.Entities.IncomeTransaction", b =>
-                {
-                    b.HasOne("VF.Core.Entities.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("VF.Core.Entities.Transaction", null)
-                        .WithOne()
-                        .HasForeignKey("VF.Core.Entities.IncomeTransaction", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
+                    b.HasOne("VF.Core.Entities.TransferTransaction", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("TransferTransactionId");
                 });
 
             modelBuilder.Entity("VF.Core.Entities.TransferTransaction", b =>
                 {
+                    b.HasOne("VF.Core.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
                     b.HasOne("VF.Core.Entities.Account", "DestinyAccount")
                         .WithMany()
                         .HasForeignKey("DestinyAccountId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("VF.Core.Entities.Transaction", null)
-                        .WithOne()
-                        .HasForeignKey("VF.Core.Entities.TransferTransaction", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("VF.Core.Entities.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId");
 
                     b.HasOne("VF.Core.Entities.Account", "OriginAccount")
                         .WithMany()
@@ -538,9 +586,19 @@ namespace VF.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("VF.Core.Entities.Subcategory", "Subcategory")
+                        .WithMany()
+                        .HasForeignKey("SubcategoryId");
+
+                    b.Navigation("Category");
+
                     b.Navigation("DestinyAccount");
 
+                    b.Navigation("Member");
+
                     b.Navigation("OriginAccount");
+
+                    b.Navigation("Subcategory");
                 });
 
             modelBuilder.Entity("VF.Core.Entities.Account", b =>
@@ -551,6 +609,21 @@ namespace VF.Infrastructure.Migrations
             modelBuilder.Entity("VF.Core.Entities.Category", b =>
                 {
                     b.Navigation("Subcategories");
+                });
+
+            modelBuilder.Entity("VF.Core.Entities.ExpenseTransaction", b =>
+                {
+                    b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("VF.Core.Entities.IncomeTransaction", b =>
+                {
+                    b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("VF.Core.Entities.TransferTransaction", b =>
+                {
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("VF.Core.Entities.User", b =>

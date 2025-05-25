@@ -11,7 +11,7 @@ public interface ICategoryRepository
 
     Task<List<CategoryWithSubcategoriesViewModel>> GetCategoriesAsync(int transactionType);
 
-    Task<List<SubcategoryViewModel>> GetSubcategoriesAsync(List<int> categoryIds);
+    Task<List<SubcategoryViewModel>> GetSubcategoriesAsync(List<Guid> categoryIds);
 
-    Task RemoveAsync(int id);
+    Task RemoveAsync(Guid id);
 }

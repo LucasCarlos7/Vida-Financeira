@@ -4,7 +4,7 @@ namespace VF.Core.Entities;
 
 public class CreditCard
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string CardName { get; set; }
     public CardFlagEnum CardFlag { get; set; } // Enum Bandeira Cartão
     public int DueDay { get; set; } // Dia de vencimento
@@ -12,6 +12,6 @@ public class CreditCard
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public int AccountId { get; set; }
+    public Guid AccountId { get; set; }
     public Account Account { get; set; }
 }

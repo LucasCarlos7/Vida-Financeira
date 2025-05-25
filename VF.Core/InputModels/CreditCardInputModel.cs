@@ -9,5 +9,5 @@ public class CreditCardInputModel
     public CardFlagEnum CardFlag { get; set; } // Enum Bandeira Cartão
     public int DueDay { get; set; } // Dia de vencimento
     public decimal MothlyLimit { get; set; } // Limite Mensal
-    public int AccountId { get; set; }
+    public Guid AccountId { get; set; }
 }

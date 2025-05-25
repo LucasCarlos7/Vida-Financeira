@@ -14,7 +14,7 @@ namespace VF.Infrastructure.Persistence.Configurations
 
             builder.Property(c => c.Id)
                 .ValueGeneratedOnAdd()
-                .HasColumnType("int");
+                .HasColumnType("uniqueidentifier");
 
             builder.Property(c => c.CardName)
                 .IsRequired()

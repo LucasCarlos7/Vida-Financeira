@@ -2,23 +2,51 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using VF.Core.Entities;
 
-namespace VF.Infrastructure.Persistence.Configurations
+public class IncomeTransactionConfiguration : IEntityTypeConfiguration<IncomeTransaction>
 {
-    public class IncomeTransactionConfiguration : IEntityTypeConfiguration<IncomeTransaction>
+    public void Configure(EntityTypeBuilder<IncomeTransaction> builder)
     {
-        public void Configure(EntityTypeBuilder<IncomeTransaction> builder)
-        {
-            builder.ToTable("IncomeTransactions");
+        builder.ToTable("IncomeTransactions");
 
-            builder.Property(i => i.Received)
-                .IsRequired()
-                .HasColumnType("bit");
+        builder.HasKey(t => t.Id);
 
-            // Relacionamento obrigatório com Account
-            builder.HasOne(i => i.Account)
-                .WithMany()
-                .HasForeignKey("AccountId")
-                .OnDelete(DeleteBehavior.Restrict);
-        }
+        builder.Property(t => t.Id)
+            .ValueGeneratedOnAdd()
+            .HasColumnType("uniqueidentifier");
+
+        builder.Property(t => t.TransactionValue)
+            .IsRequired()
+            .HasColumnType("decimal(18,2)");
+
+        builder.Property(t => t.Description)
+            .IsRequired()
+            .HasMaxLength(250)
+            .HasColumnType("nvarchar(250)");
+
+        builder.Property(t => t.Date)
+            .IsRequired()
+            .HasColumnType("datetime2");
+
+        builder.Property(t => t.Received)
+            .IsRequired()
+            .HasColumnType("bit");
+
+        // Relacionamento com Account
+        builder.HasOne(t => t.Account)
+            .WithMany()
+            .HasForeignKey(t => t.AccountId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(t => t.Category)
+            .WithMany()
+            .HasForeignKey(t => t.CategoryId);
+
+        builder.HasOne(t => t.Subcategory)
+            .WithMany()
+            .HasForeignKey(t => t.SubcategoryId);
+
+        builder.HasOne(t => t.Member)
+            .WithMany()
+            .HasForeignKey(t => t.MemberId);
     }
 }

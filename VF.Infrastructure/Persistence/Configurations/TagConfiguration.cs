@@ -14,7 +14,7 @@ namespace VF.Infrastructure.Persistence.Configurations
 
             builder.Property(t => t.Id)
                 .IsRequired()
-                .HasColumnType("int");
+                .HasColumnType("uniqueidentifier");
 
             builder.Property(t => t.Name)
                 .IsRequired()

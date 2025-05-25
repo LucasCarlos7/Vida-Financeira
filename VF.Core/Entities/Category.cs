@@ -5,7 +5,7 @@ namespace VF.Core.Entities;
 public class Category
 {
 #nullable disable
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public string Color { get; set; }
     public TransactionTypeEnum TransactionType { get; set; }

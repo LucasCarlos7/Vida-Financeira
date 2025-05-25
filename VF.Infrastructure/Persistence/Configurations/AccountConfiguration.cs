@@ -14,7 +14,7 @@ public class AccountConfiguration : IEntityTypeConfiguration<Account>
 
         builder.Property(a => a.Id)
             .ValueGeneratedOnAdd()
-            .HasColumnType("int");
+            .HasColumnType("uniqueidentifier");
 
         builder.Property(a => a.AccountName)
             .IsRequired()

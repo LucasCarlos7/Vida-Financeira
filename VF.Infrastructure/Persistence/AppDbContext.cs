@@ -26,9 +26,9 @@ public class AppDbContext : DbContext
     public DbSet<IncomeTransaction> IncomeTransactions { get; set; }
     public DbSet<Member> Members { get; set; }
     public DbSet<Tag> Tags { get; set; }
-    public DbSet<Transaction> Transactions { get; set; }
     public DbSet<TransferTransaction> TransferTransactions { get; set; }
     
+    // public DbSet<Transaction> Transactions { get; set; }
     // public DbSet<ManualFinancialInstitution> ManualFinancialInstitutions { get; set; }
     // public DbSet<AutomaticFinancialInstitution> AutomaticFinancialInstitutions { get; set; }
 

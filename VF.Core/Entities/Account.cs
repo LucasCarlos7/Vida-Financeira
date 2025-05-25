@@ -4,7 +4,7 @@ namespace VF.Core.Entities
 {
     public class Account
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string? AccountDescription { get; set; }    
         public string AccountName { get; set; }
         public AccountTypeEnum AccountType { get; set; }
@@ -15,10 +15,10 @@ namespace VF.Core.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
 
-        public int FinancialInstitutionId { get; set; }
+        public Guid FinancialInstitutionId { get; set; }
         public FinancialInstitution FinancialInstitution { get; set; }
 
         public ICollection<CreditCard> CreditCards { get; set; } = new List<CreditCard>();
